@@ -91,26 +91,23 @@ Table of Contents
 
 1.  Introduction
 
-   [RFC4862] specifies Stateless Address Autoconfiguration (SLAAC) for
-   IPv6 [RFC2460], which typically results in hosts configuring one or
-   more "stable" addresses composed of a network prefix advertised by a
-   local router, and an Interface Identifier (IID) [RFC4291] that
-   typically embeds a link-layer address (e.g., an IEEE LAN MAC
-   address).
+   [RFC4862] specifies Stateless Address Autoconfiguration (SLAAC) for IPv6
+   [RFC2460], which typically results in hosts configuring one or more
+   "stable" addresses composed of a network prefix advertised by a local
+   router, and an Interface Identifier (IID) [RFC4291] that typically embeds
+   a link-layer address (e.g., an IEEE LAN MAC address).
 
    In some network technologies and adaptation layers, the use of an IID
-   based on a link-layer address may offer some advantages.  For
-   example, the IP-over-IEEE802.15.4 standard in [RFC6775] allows for
-   compression of IPv6 addresses when the IID is based on the underlying
-   link-layer address.
+   based on a link-layer address may offer some advantages.  For example, the
+   IP-over-IEEE802.15.4 standard in [RFC6775] allows for compression of IPv6
+   addresses when the IID is based on the underlying link-layer address.
 
-   The security and privacy implications of embedding a link-layer
-   address in an IPv6 IID have been known for some time now, and are
-
+   The security and privacy implications of embedding a link-layer address in
+   an IPv6 IID have been known for some time now, and are
 
 
-Gont, et al.             Expires August 20, 2016                [Page 2]
-
+
+Gont, et al.             Expires August 20, 2016                [Page 2] 
 Internet-Draft            Default Interface-IDs            February 2016
 
 
@@ -125,31 +122,55 @@ Internet-Draft            Default Interface-IDs            February 2016
 
    o  Device-specific vulnerability exploitation
 
-   The security and privacy drawbacks of embedding a link-layer address in an IPv6 IID are to a great extent dependent upon the properties of the link-layer address itself -- whether it is a globally unique and permanent IEEE identifier that embeds an OUI, whether it is ephemeral and randomly generated, or whether it has other properties. Implementors of IPv6 stacks are not necessarily able to control how link layer addresses get generated, and therefore IPv6 implementations cannot rely on underlying link layer addresses having any particular set of security or privacy properties. Providing standardized recommendations for IPv6 IID generation meant to achieve particular security and privacy properties therefore requires that IPv6 IIDs not embed link-layer addresses.   
-   
-   Furthermore, some popular IPv6 implementations have already deviated from the
-   traditional stable IID generation scheme to mitigate the
+   The security and privacy drawbacks of embedding a link-layer address in an
+   IPv6 IID are to a great extent dependent upon the properties of the
+   link-layer address itself -- whether it is a globally unique and permanent
+   IEEE identifier that embeds an OUI, whether it is ephemeral and randomly
+   generated, or whether it has other properties. Implementors of IPv6 stacks
+   are not necessarily able to control how link layer addresses get
+   generated, and therefore IPv6 implementations cannot rely on underlying
+   link layer addresses having any particular set of security or privacy
+   properties. Providing standardized recommendations for IPv6 IID generation
+   meant to achieve particular security and privacy properties therefore
+   requires that IPv6 IIDs not embed link-layer addresses.
+
+   Furthermore, some popular IPv6 implementations have already deviated from
+   the traditional stable IID generation scheme to mitigate the
    aforementioned security and privacy implications [Microsoft].
 
-   As a result of the aforementioned issues, in cases where SLAAC is used to generate a stable IPv6 address, this document changes the
-   default Interface Identifier generation scheme for SLAAC to that
-   specified in [RFC7217], and recommends against embedding link-layer
-   addresses in IPv6 Interface Identifiers, such that the aforementioned
-   issues are mitigated.
+   As a result of the aforementioned issues, in cases where SLAAC is used to
+   generate a stable IPv6 address, this document changes the default
+   Interface Identifier generation scheme for SLAAC to that specified in
+   [RFC7217], and recommends against embedding link-layer addresses in IPv6
+   Interface Identifiers, such that the aforementioned issues are mitigated.
 
-   NOTE:  [RFC4291] defines the "Modified EUI-64 format" for IIDs.
-      Appendix A of [RFC4291] then describes how to transform an IEEE
-      EUI-64 identifier, or an IEEE 802 48-bit MAC address from which an
-      EUI-64 identifier is derived, into an IID in the Modified EUI-64
-      format.
-    
-    In a variety of cases addresses that remain stable, either permanently or for the duration of a host's connection to a single subnet, are viewed as desirable. For example, stable addresses may be viewed as beneficial for network management, event logging, enforcement of access control, provision of quality of service, or for servers or routing interfaces. The recommendations in this document apply only in cases where implementations otherwise would have configured a stable IPv6 IID containing a link layer address. This document does not change any existing recommendations concerning the use of "temporary addresses" as specified in RFC4941. Temporary addresses are typically configured in conjunction with stable addresses; hosts that configure both a stable address with a link layer address embedded and temporary addresses may still be susceptible to the attacks discussed in [RFC7721]. The recommendations in this document aim to provide mitigations in such cases. However in cases where temporary addresses can be supported in isolation, without the need to configure a stable address, the recommendations in this document do not apply.  
+   NOTE:  [RFC4291] defines the "Modified EUI-64 format" for IIDs. Appendix A
+   of [RFC4291] then describes how to transform an IEEE EUI-64 identifier, or
+   an IEEE 802 48-bit MAC address from which an EUI-64 identifier is derived,
+   into an IID in the Modified EUI-64 format.
+
+    In a variety of cases addresses that remain stable, either permanently or
+    for the duration of a host's connection to a single subnet, are viewed as
+    desirable. For example, stable addresses may be viewed as beneficial for
+    network management, event logging, enforcement of access control,
+    provision of quality of service, or for servers or routing interfaces.
+    The recommendations in this document apply only in cases where
+    implementations otherwise would have configured a stable IPv6 IID
+    containing a link layer address. This document does not change any
+    existing recommendations concerning the use of "temporary addresses" as
+    specified in RFC4941. Temporary addresses are typically configured in
+    conjunction with stable addresses; hosts that configure both a stable
+    address with a link layer address embedded and temporary addresses may
+    still be susceptible to the attacks discussed in [RFC7721]. The
+    recommendations in this document aim to provide mitigations in such
+    cases. However in cases where temporary addresses can be supported in
+    isolation, without the need to configure a stable address, the
+    recommendations in this document do not apply.
 
    Finally this document updates [RFC3315] by specifying additional
-   requirements on the generation of Interface Identifiers used in
-   Dynamic Host Configuration Protocol version 6 (DHCPv6), and also
-   provides advice to system administrators who employ manual
-   configuration.
+   requirements on the generation of Interface Identifiers used in Dynamic
+   Host Configuration Protocol version 6 (DHCPv6), and also provides advice
+   to system administrators who employ manual configuration.
 
 2.  Terminology
 
